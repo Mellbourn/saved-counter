@@ -8,6 +8,7 @@
   "scripts": {
     "build": "sam build",
     "start": "sam deploy --guided",
-    "start:local": "sam local invoke"
+    "start:local": "sam local invoke",
+    "clean": "aws cloudformation delete-stack --stack-name saved-counter"
   }
 }
