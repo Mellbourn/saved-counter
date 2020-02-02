@@ -2,6 +2,7 @@ const { ApolloServer, gql } = require("apollo-server-lambda");
 
 const typeDefs = gql`
   type Query {
+    "all counters"
     counters: [Counter!]!
   }
 
@@ -17,6 +18,11 @@ const resolvers = {
   }
 };
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  playground: true,
+  introspection: true
+});
 
 exports.graphqlHandler = server.createHandler();
