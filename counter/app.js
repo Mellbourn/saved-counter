@@ -10,11 +10,22 @@ const typeDefs = gql`
     name: String
     value: Int!
   }
+
+  type Mutation {
+    increase: Int
+    decrease: Int
+  }
 `;
+
+let counters = [{ name: "default", value: 0 }];
 
 const resolvers = {
   Query: {
-    counters: () => [{ name: "default", value: 0 }]
+    counters: () => counters
+  },
+  Mutation: {
+    increase: () => counters[0].value++,
+    decrease: () => counters[0].value--
   }
 };
 
