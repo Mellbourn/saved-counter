@@ -21,6 +21,13 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+  CounterDatabase:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: name
+        Type: String
+      TableName: counter-table
 Outputs:
   HelloWorldApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
