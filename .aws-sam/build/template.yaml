@@ -13,14 +13,14 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: CounterFunction
-      Handler: app.lambdaHandler
+      Handler: app.graphqlHandler
       Runtime: nodejs12.x
       Events:
-        Count:
+        AnyRequest:
           Type: Api
           Properties:
-            Path: /counter
-            Method: get
+            Path: /graphql
+            Method: ANY
   CounterDatabase:
     Type: AWS::Serverless::SimpleTable
     Properties:
