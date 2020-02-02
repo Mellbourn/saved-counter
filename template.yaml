@@ -38,7 +38,7 @@ Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   CounterApi:
     Description: "API Gateway endpoint URL for Prod stage for Counter function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/counter/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/graphql/"
   CounterFunction:
     Description: "Counter Lambda Function ARN"
     Value: !GetAtt CounterFunction.Arn

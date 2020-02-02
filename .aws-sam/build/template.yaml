@@ -32,7 +32,7 @@ Outputs:
   CounterApi:
     Description: API Gateway endpoint URL for Prod stage for Counter function
     Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/counter/
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/graphql/
   CounterFunction:
     Description: Counter Lambda Function ARN
     Value:
