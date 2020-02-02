@@ -6,9 +6,9 @@
   "author": "Klas Mellbourn <klas@mellbourn.net>",
   "license": "MIT",
   "scripts": {
-    "build": "sam build",
-    "start": "sam deploy --guided",
-    "start:local": "sam local invoke",
+    "build": "pushd counter && yarn build && popd && sam build",
+    "start": "yarn build && sam deploy --guided",
+    "start:local": "yarn build && sam local invoke",
     "clean": "aws cloudformation delete-stack --stack-name saved-counter-stack"
   }
 }

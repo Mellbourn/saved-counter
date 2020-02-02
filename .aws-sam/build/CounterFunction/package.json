@@ -2,7 +2,7 @@
   "name": "counter",
   "version": "1.0.0",
   "description": "keeps track of counters",
-  "main": "app.js",
+  "main": "dist/app.js",
   "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
   "author": "Klas Mellbourn",
   "license": "MIT",
@@ -10,10 +10,15 @@
     "axios": "^0.18.0"
   },
   "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
     "test": "mocha tests/unit/"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.40",
+    "@types/node": "^13.7.0",
     "chai": "^4.2.0",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "typescript": "^3.7.5"
   }
 }
