@@ -14,5 +14,7 @@
     "statusBarItem.hoverBackground": "#aa8bbb",
     "statusBar.foreground": "#e7e7e7"
   },
-  "peacock.color": "#926ba8"
+  "peacock.color": "#926ba8",
+  "atlascode.bitbucket.enabled": false,
+  "atlascode.jira.enabled": false
 }
