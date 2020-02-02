@@ -24,8 +24,8 @@ const resolvers = {
     counters: () => counters
   },
   Mutation: {
-    increase: () => counters[0].value++,
-    decrease: () => counters[0].value--
+    increase: () => ++counters[0].value,
+    decrease: () => --counters[0].value
   }
 };
 
