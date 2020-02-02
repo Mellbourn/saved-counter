@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "sam build",
-    "start": "sam deploy --guided",
-    "start:local": "sam local invoke",
+    "start": "sam build && yes|sam deploy",
+    "start:local": "sam build && sam local invoke",
     "clean": "aws cloudformation delete-stack --stack-name saved-counter-stack"
   }
 }

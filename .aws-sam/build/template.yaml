@@ -13,14 +13,14 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: CounterFunction
-      Handler: app.lambdaHandler
+      Handler: app.graphqlHandler
       Runtime: nodejs12.x
       Events:
-        Count:
+        AnyRequest:
           Type: Api
           Properties:
-            Path: /counter
-            Method: get
+            Path: /graphql
+            Method: ANY
   CounterDatabase:
     Type: AWS::Serverless::SimpleTable
     Properties:
@@ -32,7 +32,7 @@ Outputs:
   CounterApi:
     Description: API Gateway endpoint URL for Prod stage for Counter function
     Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/counter/
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/graphql/
   CounterFunction:
     Description: Counter Lambda Function ARN
     Value:
