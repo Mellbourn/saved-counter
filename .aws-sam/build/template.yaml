@@ -9,17 +9,17 @@ Globals:
   Function:
     Timeout: 3
 Resources:
-  HelloWorldFunction:
+  CounterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: HelloWorldFunction
+      CodeUri: CounterFunction
       Handler: app.lambdaHandler
       Runtime: nodejs12.x
       Events:
-        HelloWorld:
+        Count:
           Type: Api
           Properties:
-            Path: /hello
+            Path: /counter
             Method: get
   CounterDatabase:
     Type: AWS::Serverless::SimpleTable
@@ -29,19 +29,19 @@ Resources:
         Type: String
       TableName: counter-table
 Outputs:
-  HelloWorldApi:
-    Description: API Gateway endpoint URL for Prod stage for Hello World function
+  CounterApi:
+    Description: API Gateway endpoint URL for Prod stage for Counter function
     Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
-  HelloWorldFunction:
-    Description: Hello World Lambda Function ARN
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/counter/
+  CounterFunction:
+    Description: Counter Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - HelloWorldFunction
+      - CounterFunction
       - Arn
-  HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
+  CounterFunctionIamRole:
+    Description: Implicit IAM Role created for Counter function
     Value:
       Fn::GetAtt:
-      - HelloWorldFunctionRole
+      - CounterFunctionRole
       - Arn
