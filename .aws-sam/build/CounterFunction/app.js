@@ -2,13 +2,18 @@ const { ApolloServer, gql } = require("apollo-server-lambda");
 
 const typeDefs = gql`
   type Query {
-    counters: String
+    counters: [Counter!]!
+  }
+
+  type Counter {
+    name: String
+    value: Int!
   }
 `;
 
 const resolvers = {
   Query: {
-    counters: () => "hello"
+    counters: () => [{ name: "default", value: 0 }]
   }
 };
 
