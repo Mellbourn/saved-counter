@@ -1,5 +1,5 @@
 {
-  "name": "saved-counter",
+  "name": "saved-counter-server",
   "version": "1.0.0",
   "description": "AWS Serverless Application Model based graphql app for storing counters online",
   "repository": "https://github.com/Mellbourn/saved-counter",
