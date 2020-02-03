@@ -6,5 +6,8 @@
       "packages/client",
       "packages/server"
     ]
+  },
+  "scripts": {
+    "start": "yarn workspaces foreach -p run start"
   }
 }
