@@ -36,4 +36,15 @@ const server = new ApolloServer({
   introspection: true
 });
 
-exports.graphqlHandler = server.createHandler();
+exports.graphqlHandler = (event, lambdaContext, callback) => {
+  // Playground handler
+  if (event.httpMethod === "GET") {
+    server.createHandler()(
+      { ...event, path: event.requestContext.path || event.path },
+      lambdaContext,
+      callback
+    );
+  } else {
+    server.createHandler()(event, lambdaContext, callback);
+  }
+};
