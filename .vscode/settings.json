@@ -1,4 +1,5 @@
 {
+  "typescript.tsdk": "packages/client/.vscode/pnpify/typescript/lib",
   "workbench.colorCustomizations": {
     "activityBar.background": "#926ba8",
     "activityBar.activeBorder": "#c4b59b",
