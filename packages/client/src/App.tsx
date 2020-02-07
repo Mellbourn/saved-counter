@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { ApolloError, gql } from "apollo-boost";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
 const GET_COUNTERS = gql`
   query Counters {
@@ -9,6 +9,12 @@ const GET_COUNTERS = gql`
       name
       value
     }
+  }
+`;
+
+const INCREASE = gql`
+  mutation {
+    increase
   }
 `;
 
@@ -20,6 +26,9 @@ const App = () => {
   }: { data: any; loading: boolean; error?: ApolloError } = useQuery(
     GET_COUNTERS
   );
+
+  const [increase] = useMutation(INCREASE);
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -37,6 +46,7 @@ const App = () => {
             </div>
           )
         )}
+        <button onClick={() => increase()}>Increase</button>
       </header>
     </div>
   );
