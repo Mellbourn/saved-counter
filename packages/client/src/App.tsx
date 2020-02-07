@@ -27,7 +27,21 @@ const App = () => {
     GET_COUNTERS
   );
 
-  const [increase] = useMutation(INCREASE);
+  const [increase] = useMutation(INCREASE, {
+    update(cache, { data: { increase } }) {
+      const counters = cache.readQuery({
+        query: GET_COUNTERS
+      });
+      cache.writeQuery({
+        query: GET_COUNTERS,
+        data: {
+          counters: [
+            { name: "default", value: increase, ["__typename"]: "Counter" }
+          ]
+        }
+      });
+    }
+  });
 
   if (loading) {
     return <h2>Loading...</h2>;
