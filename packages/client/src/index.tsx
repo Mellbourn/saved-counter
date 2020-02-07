@@ -26,7 +26,8 @@ const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     new HttpLink({
-      uri: "https://w5xlvm3vzz.lp.gql.zone/graphql",
+      uri:
+        "https://ogys7jrs99.execute-api.eu-north-1.amazonaws.com/Prod/graphql/",
       credentials: "same-origin"
     })
   ]),
