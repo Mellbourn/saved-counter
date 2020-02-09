@@ -81,7 +81,7 @@ const App = () => {
 
   const onFailure: (error: any) => void = error => {
     setIsLoggedIn(false);
-    console.log(`failed to log in, error: ${error}`);
+    console.warn(`failed to log in, error: ${error}`);
   };
 
   const onLogoutSuccess = () => setIsLoggedIn(false);
