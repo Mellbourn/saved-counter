@@ -1,14 +1,9 @@
 {
   "name": "saved-counter",
-  "version": "1.0.0",
-  "description": "AWS Serverless Application Model based graphql app for storing counters online",
-  "repository": "https://github.com/Mellbourn/saved-counter",
-  "author": "Klas Mellbourn <klas@mellbourn.net>",
-  "license": "MIT",
-  "scripts": {
-    "build": "sam build",
-    "start": "sam build && yes|sam deploy",
-    "start:local": "sam build && sam local invoke",
-    "clean": "aws cloudformation delete-stack --stack-name saved-counter-stack"
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/server"
+    ]
   }
 }
