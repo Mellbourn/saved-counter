@@ -18,6 +18,12 @@ const INCREASE = gql`
   }
 `;
 
+const DECREASE = gql`
+  mutation {
+    decrease
+  }
+`;
+
 const App = () => {
   const {
     data,
@@ -40,13 +46,28 @@ const App = () => {
     }
   });
 
+  const [decrease] = useMutation(DECREASE, {
+    update(cache, { data: { decrease } }) {
+      cache.writeQuery({
+        query: GET_COUNTERS,
+        data: {
+          counters: [
+            { name: "default", value: decrease, __typename: "Counter" }
+          ]
+        }
+      });
+    }
+  });
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
+
   if (error) {
     console.log("error", error);
     return <h2>Error: {error.message}</h2>;
   }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -57,7 +78,10 @@ const App = () => {
             </div>
           )
         )}
-        <button onClick={() => increase()}>Increase</button>
+        <span>
+          <button onClick={() => decrease()}>-</button>
+          <button onClick={() => increase()}>+</button>
+        </span>
       </header>
     </div>
   );
