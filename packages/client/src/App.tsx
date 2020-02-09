@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { ApolloError, gql } from "apollo-boost";
 import { useQuery, useMutation } from "@apollo/react-hooks";
+import {
+  GoogleLogin,
+  GoogleLoginResponseOffline,
+  GoogleLoginResponse,
+  GoogleLogout
+} from "react-google-login";
 
 const GET_COUNTERS = gql`
   query Counters {
@@ -25,6 +31,7 @@ const DECREASE = gql`
 `;
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const {
     data,
     loading,
@@ -68,9 +75,34 @@ const App = () => {
     return <h2>Error: {error.message}</h2>;
   }
 
+  const onSuccess: (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => void = () => setIsLoggedIn(true);
+
+  const onFailure: (error: any) => void = error => {
+    setIsLoggedIn(false);
+    console.log(`failed to log in, error: ${error}`);
+  };
+
+  const onLogoutSuccess = () => setIsLoggedIn(false);
+
   return (
     <div className="App">
+      {isLoggedIn ? (
+        <GoogleLogout
+          clientId="964149166585-0308rmbkkfgrvgcekis3lipbe7o0om40.apps.googleusercontent.com"
+          onLogoutSuccess={onLogoutSuccess}
+        ></GoogleLogout>
+      ) : (
+        <GoogleLogin
+          clientId="964149166585-0308rmbkkfgrvgcekis3lipbe7o0om40.apps.googleusercontent.com"
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+        ></GoogleLogin>
+      )}
+
       <header className="App-header">
+        <div>{isLoggedIn ? "Logged in" : "not logged in"}</div>
         {data.counters.map(
           ({ name, value }: { name: string; value: number }) => (
             <div key={name}>
