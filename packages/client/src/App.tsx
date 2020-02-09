@@ -32,6 +32,8 @@ const DECREASE = gql`
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const {
     data,
     loading,
@@ -75,9 +77,29 @@ const App = () => {
     return <h2>Error: {error.message}</h2>;
   }
 
+  const isOnline = (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline
+  ): response is GoogleLoginResponse => {
+    return (response as GoogleLoginResponse).profileObj !== undefined;
+  };
+
   const onSuccess: (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
-  ) => void = () => setIsLoggedIn(true);
+  ) => void = response => {
+    console.log("response", response);
+
+    let profileName = "";
+    let profileEmail = "";
+    if (isOnline(response)) {
+      profileName = response.profileObj.name;
+      profileEmail = response.profileObj.email;
+    }
+
+    setName(profileName);
+    setEmail(profileEmail);
+
+    setIsLoggedIn(true);
+  };
 
   const onFailure: (error: any) => void = error => {
     setIsLoggedIn(false);
@@ -89,10 +111,13 @@ const App = () => {
   return (
     <div className="App">
       {isLoggedIn ? (
-        <GoogleLogout
-          clientId="964149166585-0308rmbkkfgrvgcekis3lipbe7o0om40.apps.googleusercontent.com"
-          onLogoutSuccess={onLogoutSuccess}
-        ></GoogleLogout>
+        <>
+          <GoogleLogout
+            clientId="964149166585-0308rmbkkfgrvgcekis3lipbe7o0om40.apps.googleusercontent.com"
+            onLogoutSuccess={onLogoutSuccess}
+          ></GoogleLogout>
+          {email}
+        </>
       ) : (
         <GoogleLogin
           clientId="964149166585-0308rmbkkfgrvgcekis3lipbe7o0om40.apps.googleusercontent.com"
@@ -102,7 +127,7 @@ const App = () => {
       )}
 
       <header className="App-header">
-        <div>{isLoggedIn ? "Logged in" : "not logged in"}</div>
+        <div>{isLoggedIn ? `${name} logged in` : "not logged in"}</div>
         {data.counters.map(
           ({ name, value }: { name: string; value: number }) => (
             <div key={name}>
