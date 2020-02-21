@@ -9,6 +9,7 @@
     "build": "sam build",
     "start": "sam build && yes|sam deploy",
     "start:local": "sam build && sam local invoke",
-    "clean": "aws cloudformation delete-stack --stack-name saved-counter-stack"
+    "clean": "aws cloudformation delete-stack --stack-name saved-counter-stack",
+    "logs": "sam logs -n CounterFunction --stack-name saved-counter-stack"
   }
 }
